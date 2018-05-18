@@ -31,7 +31,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'bill_date',
             'bill_pay',
             'price',
-            //'status',
+            'status',
             //'name',
             //'bill_link',
 
