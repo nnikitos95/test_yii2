@@ -18,6 +18,10 @@ namespace app\models;
  */
 class Bill extends \yii\db\ActiveRecord
 {
+    const STATUS_IS_PAID = 1;
+    const STATUS_IS_NOT_PAID = 2;
+    const STATUS_IS_WAIT = 3;
+
     /**
      * {@inheritdoc}
      */
@@ -36,6 +40,7 @@ class Bill extends \yii\db\ActiveRecord
             [['client_id', 'price', 'status'], 'integer'],
             [['bill_date', 'bill_pay'], 'safe'],
             [['name', 'bill_link'], 'string', 'max' => 255],
+            [['status'], 'default', 'value' => self::STATUS_IS_NOT_PAID],
             [['client_id'], 'exist', 'skipOnError' => true, 'targetClass' => Client::className(), 'targetAttribute' => ['client_id' => 'id']],
         ];
     }
@@ -63,5 +68,18 @@ class Bill extends \yii\db\ActiveRecord
     public function getClient()
     {
         return $this->hasOne(Client::className(), ['id' => 'client_id']);
+    }
+
+
+    /**
+     * @return array
+     */
+    public static function getStatuses()
+    {
+        return [
+            self::STATUS_IS_PAID => 'Оплачен',
+            self::STATUS_IS_NOT_PAID => 'Не оплачен',
+            self::STATUS_IS_WAIT => 'Ожидает',
+        ];
     }
 }

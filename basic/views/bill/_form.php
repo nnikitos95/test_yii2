@@ -6,21 +6,20 @@ use yii\widgets\ActiveForm;
 /* @var $this yii\web\View */
 /* @var $model app\models\Bill */
 /* @var $form yii\widgets\ActiveForm */
+/* @var $clients array */
 ?>
 
 <div class="bill-form">
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'client_id')->textInput() ?>
+    <?= $form->field($model, 'client_id')->dropDownList($clients) ?>
 
     <?= $form->field($model, 'bill_date')->textInput() ?>
 
     <?= $form->field($model, 'bill_pay')->textInput() ?>
 
     <?= $form->field($model, 'price')->textInput() ?>
-
-    <?= $form->field($model, 'status')->textInput() ?>
 
     <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 

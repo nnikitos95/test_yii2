@@ -1,8 +1,12 @@
 <?php
 
-namespace app\models;
+namespace app\controllers;
 
+use app\models\Bill;
+use app\models\Client;
+use app\models\SearchBill;
 use Yii;
+use yii\helpers\ArrayHelper;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -68,8 +72,14 @@ class BillController extends Controller
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
+        $clients = Client::find()->all();
+        $clients = array_combine(
+            ArrayHelper::getColumn($clients, 'id'),
+            ArrayHelper::getColumn($clients, 'name')
+        );
         return $this->render('create', [
             'model' => $model,
+            'clients' => $clients
         ]);
     }
 
